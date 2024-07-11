@@ -1,5 +1,6 @@
-Podstawowe wyrażenia regularne
-Zadanie 1: Znajdź wszystkie wystąpienia cyfry 5 w tekście.
+## Podstawowe wyrażenia regularne
+
+## Zadanie 1: Znajdź wszystkie wystąpienia cyfry 5 w tekście.
 
 2031  grep -E '5' moja_lista_zadan.txt 
 
@@ -241,8 +242,6 @@ Dzieci bawią się w parku.
 ```sh
 grep -oE '\b[A-Z][a-z]*\b' sample.txt
 ```
-
-### Pełny przykład w Markdown:
 
 ```markdown
 # Znajdowanie słów zaczynających się od wielkiej litery za pomocą `grep` i wyrażeń regularnych
