@@ -2,13 +2,13 @@
 
 ## Zadanie 1: Znajdź wszystkie wystąpienia cyfry 5 w tekście.
 
-2031  grep -E '5' moja_lista_zadan.txt 
+grep -E '5' moja_lista_zadan.txt 
 
-Zadanie 2: Znajdź wszystkie wystąpienia liter a, b, lub c w tekście.
+## Zadanie 2: Znajdź wszystkie wystąpienia liter a, b, lub c w tekście.
 
-2035  grep -E '[abc]' moja_lista_zadan.txt 
+grep -E '[abc]' moja_lista_zadan.txt 
 
-Zadanie 3: Znajdź wszystkie słowa, które zaczynają się od litery b.
+## Zadanie 3: Znajdź wszystkie słowa, które zaczynają się od litery b.
 
 \b: Znacznik początku słowa.
 b: Litera b.
@@ -19,11 +19,11 @@ grep -E '\bb\w*' sample.txt
 Znajdź wszystkie słowa zaczynające się od litery b i wyświetl je:
 grep -oE '\bb\w*' sample.txt
 
-Zadanie 4: Znajdź wszystkie liczby trzycyfrowe w tekście.
+## Zadanie 4: Znajdź wszystkie liczby trzycyfrowe w tekście.
 
 grep -oE '\b[0-9]{3}\b' sample.txt
 
-Wyjaśnienie
+## Wyjaśnienie
 grep -oE '\b[0-9]{3}\b' sample.txt: Flaga -o sprawia, że grep wyświetla tylko dopasowania, a nie całe linie. Flaga -E używa rozszerzonych wyrażeń regularnych.
 
 \b: Granica słowa.
@@ -35,7 +35,7 @@ grep -oE '\b[0-9]{3}:' sample.txt
 Znajdź wszystkie liczby trzycyfrowe zaczynające się od 2 przed znakiem : i wyświetl je:
 grep -oE '\b2[0-9]{2}:' sample.txt
 
-Zadanie 5: Znajdź wszystkie adresy e-mail w tekście.
+## Zadanie 5: Znajdź wszystkie adresy e-mail w tekście.
 
 Załóżmy, że masz plik sample.txt z następującą zawartością:
 
@@ -53,10 +53,9 @@ grep -oE '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}' sample.txt: Flaga -o s
 \.[a-zA-Z]{2,}: Końcówka domeny (kropka i co najmniej dwa znaki).
 
 
+## Średnio zaawansowane wyrażenia regularne
 
-
-Średnio zaawansowane wyrażenia regularne
-Zadanie 6: Znajdź wszystkie słowa, które zaczynają się na a i kończą się na z.
+## Zadanie 6: Znajdź wszystkie słowa, które zaczynają się na a i kończą się na z.
 
 grep -oE '\ba\w*z\b' sample.txt
 Wyjaśnienie
@@ -68,7 +67,7 @@ z: Litera z (koniec słowa).
 \b: Granica słowa.
 
 
-Zadanie 7: Znajdź wszystkie liczby dziesiętne w formacie 123.45.
+## Zadanie 7: Znajdź wszystkie liczby dziesiętne w formacie 123.45.
 
 Cena produktu wynosi 123.45 PLN.
 Inny produkt kosztuje 67.89 PLN.
@@ -84,7 +83,7 @@ grep -oE '[0-9]+\.[0-9]{2}' sample.txt: Flaga -o sprawia, że grep wyświetla ty
 [0-9]{2}: Dokładnie dwie cyfry po kropce.
 
 
-Zadanie 8: Znajdź wszystkie numery telefonów w formacie 123-456-7890.
+## Zadanie 8: Znajdź wszystkie numery telefonów w formacie 123-456-7890.
 
 
 Skontaktuj się z nami pod numerem 123-456-7890.
@@ -104,7 +103,7 @@ grep -oE '[0-9]{3}-[0-9]{3}-[0-9]{4}' sample.txt: Flaga -o sprawia, że grep wy�
 [0-9]{4}: Dokładnie cztery cyfry.
 
 
-Zadanie 9: Znajdź wszystkie słowa, które zawierają co najmniej jedną cyfrę.
+## Zadanie 9: Znajdź wszystkie słowa, które zawierają co najmniej jedną cyfrę.
 
 grep -oE '\b\w*[0-9]\w*\b' sample.txt
 
@@ -116,7 +115,7 @@ grep -oE '\b\w*[0-9]\w*\b' sample.txt: Flaga -o sprawia, że grep wyświetla tyl
 \w*: Zero lub więcej znaków alfanumerycznych po cyfrze.
 \b: Granica słowa.
 
-Zadanie 10: Znajdź wszystkie daty w formacie dd/mm/yyyy.
+## Zadanie 10: Znajdź wszystkie daty w formacie dd/mm/yyyy.
 
 Wydarzenie odbędzie się 01/12/2023.
 Kolejne spotkanie jest zaplanowane na 15/08/2021.
@@ -156,8 +155,6 @@ Poprawne daty: 05/11/2020, 30/09/1999.
 ```sh
 grep -oE '\b[0-3][0-9]/[0-1][0-9]/[0-9]{4}\b' sample.txt
 ```
-
-### Pełny przykład w Markdown:
 
 ```markdown
 # Znajdowanie dat w formacie `dd/mm/yyyy` za pomocą `grep` i wyrażeń regularnych
@@ -219,8 +216,9 @@ Te komendy pozwolą Ci znaleźć i wyświetlić wszystkie daty w formacie `dd/mm
 ```
 
 
-Zaawansowane wyrażenia regularne
-Zadanie 11: Znajdź wszystkie słowa zaczynające się od wielkiej litery.
+## Zaawansowane wyrażenia regularne
+
+## Zadanie 11: Znajdź wszystkie słowa zaczynające się od wielkiej litery.
 
 Oczywiście! Oto jak możesz znaleźć wszystkie słowa zaczynające się od wielkiej litery za pomocą `grep` i wyrażeń regularnych, wraz z oznaczeniem wyników znacznikami Markdown.
 
@@ -302,7 +300,41 @@ Te komendy pozwolą Ci znaleźć i wyświetlić wszystkie słowa w podanym pliku
 Mam nadzieję, że to pomoże! Jeśli masz więcej pytań lub potrzebujesz dalszej pomocy, daj znać!
 
 
-Zadanie 12: Znajdź wszystkie kody pocztowe w formacie XX-XXX.
+## Zadanie 12: Znajdź wszystkie kody pocztowe w formacie XX-XXX.
+
+# Znajdowanie kodów pocztowych w formacie XX-XXX
+
+Aby znaleźć wszystkie kody pocztowe w formacie `XX-XXX` w pliku tekstowym, użyj poniższego polecenia `grep` wraz z odpowiednim wyrażeniem regularnym:
+
+```sh
+grep -Eo '\<[0-9]{2}-[0-9]{3}\>' filename.txt
+
+
+Możesz to zrobić używając poniższego polecenia w terminalu:
+
+```sh
+cat <<EOT > testfile.txt
+Here are some postal codes:
+00-001
+12-345
+98-765
+Some invalid codes:
+12345
+12-3456
+123-45
+Mixed with text:
+My address is 12-345, some random text here.
+Another one is 34-567. Here is 23-456.
+And some more codes like 78-910, 56-789, and 12-123.
+End of the list.
+EOT
+
+
+
+
+
+
+
 Zadanie 13: Znajdź wszystkie adresy IP w tekście.
 Zadanie 14: Znajdź wszystkie tagi HTML w tekście.
 Zadanie 15: Znajdź wszystkie zdania kończące się znakiem zapytania ?.
