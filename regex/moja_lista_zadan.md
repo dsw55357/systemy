@@ -216,7 +216,7 @@ Te komendy pozwolą Ci znaleźć i wyświetlić wszystkie daty w formacie `dd/mm
 ```
 
 
-## Zaawansowane wyrażenia regularne
+### Zaawansowane wyrażenia regularne
 
 ## Zadanie 11: Znajdź wszystkie słowa zaczynające się od wielkiej litery.
 
@@ -308,7 +308,7 @@ Aby znaleźć wszystkie kody pocztowe w formacie `XX-XXX` w pliku tekstowym, uż
 
 ```sh
 grep -Eo '\<[0-9]{2}-[0-9]{3}\>' filename.txt
-
+```
 
 Możesz to zrobić używając poniższego polecenia w terminalu:
 
@@ -328,14 +328,13 @@ Another one is 34-567. Here is 23-456.
 And some more codes like 78-910, 56-789, and 12-123.
 End of the list.
 EOT
+```
+
+## Zadanie 13: Znajdź wszystkie adresy IP w tekście.
 
 
 
 
-
-
-
-Zadanie 13: Znajdź wszystkie adresy IP w tekście.
 Zadanie 14: Znajdź wszystkie tagi HTML w tekście.
 Zadanie 15: Znajdź wszystkie zdania kończące się znakiem zapytania ?.
 Bardziej złożone wyrażenia regularne
