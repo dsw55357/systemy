@@ -728,8 +728,22 @@ Wyrażenie regularne do znalezienia akronimów składających się z wielkich li
 
 ```regex
 \b[A-Z]{2,}\b
+```
+
+### Zapisz zawartość do pliku `testfile.txt`
+
+Możesz zapisać powyższą zawartość do pliku `testfile.txt` używając poniższego polecenia w terminalu:
+
+```sh
+cat <<EOT > testfile.txt
+NASA is responsible for the civilian space program. The FBI investigates federal crimes. Other acronyms include CIA, NSA, and EPA.
+EOT
 
 
+####Użycie grep do znalezienia akronimów składających się z wielkich liter:
+
+grep -Eo '\b[A-Z]{2,}\b' testfile.txt
+```
 
 
 Zadanie 23: Znajdź wszystkie adresy MAC w tekście.
