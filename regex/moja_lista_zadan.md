@@ -373,6 +373,7 @@ Wyrażenie regularne:
 
 ## Zadanie 14: Znajdź wszystkie tagi HTML w tekście.
 
+```sh
 grep -E '<([a-zA-Z]|/[a-zA-Z])+>' moja_lista_zadan.md 
 
 Wyjaśnienie polecenia
@@ -396,6 +397,7 @@ cat <<EOT > testfile.txt
   </body>
 </html>
 EOT
+```
 
 Zadanie 15: Znajdź wszystkie zdania kończące się znakiem zapytania ?.
 
