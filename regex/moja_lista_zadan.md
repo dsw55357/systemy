@@ -605,7 +605,9 @@ EOT
 ```
 
 
-Zadanie 20: Znajdź wszystkie fragmenty tekstu w cudzysłowach.
+## Zadanie 20: Znajdź wszystkie fragmenty tekstu w cudzysłowach.
+
+```sh
 
 Zakładamy, że tekst w cudzysłowach jest otoczony podwójnymi cudzysłowami.
 
@@ -642,18 +644,19 @@ He replied, "I'm fine, thank you."
 He added, "Let's see if it works."
 EOT
 
-
 Oczekiwany wynik:
 
 "Hello, how are you?"
 "I'm fine, thank you."
 "This is a test file,"
 "Let's see if it works."
+```
 
-
-## Bardzo zaawansowane wyrażenia regularne
+# Bardzo zaawansowane wyrażenia regularne
 
 ## Zadanie 21: Znajdź wszystkie linki URL w tekście.
+
+```sh
 
 Zakładamy, że linki URL zaczynają się od http:// lub https:// i mogą zawierać różne znaki, które są typowe dla adresów URL.
 
@@ -677,7 +680,6 @@ https?://: Dopasowuje http:// lub https://.
 
 Możesz zapisać powyższą zawartość do pliku `testfile.txt` używając poniższego polecenia w terminalu:
 
-```sh
 cat <<EOT > testfile.txt
 Visit our website at http://example.com for more information.
 Secure site: https://secure.example.com/login.
@@ -693,6 +695,8 @@ http://example.com
 https://secure.example.com/login
 https://www.example.org
 http://www.test.com
+```
+
 
 
 Zadanie 22: Znajdź wszystkie akronimy składające się z wielkich liter (np. NASA, FBI).
