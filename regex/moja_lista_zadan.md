@@ -1,15 +1,20 @@
-## Podstawowe wyrażenia regularne
+# Podstawowe wyrażenia regularne
 
 ## Zadanie 1: Znajdź wszystkie wystąpienia cyfry 5 w tekście.
 
+```sh
 grep -E '5' moja_lista_zadan.txt 
+```
 
 ## Zadanie 2: Znajdź wszystkie wystąpienia liter a, b, lub c w tekście.
 
+```sh
 grep -E '[abc]' moja_lista_zadan.txt 
+```
 
 ## Zadanie 3: Znajdź wszystkie słowa, które zaczynają się od litery b.
 
+```sh
 \b: Znacznik początku słowa.
 b: Litera b.
 \w*: Zero lub więcej znaków alfanumerycznych.
@@ -18,9 +23,11 @@ grep -E '\bb\w*' sample.txt
 
 Znajdź wszystkie słowa zaczynające się od litery b i wyświetl je:
 grep -oE '\bb\w*' sample.txt
+```
 
 ## Zadanie 4: Znajdź wszystkie liczby trzycyfrowe w tekście.
 
+```sh
 grep -oE '\b[0-9]{3}\b' sample.txt
 
 ## Wyjaśnienie
@@ -34,9 +41,12 @@ grep -oE '\b[0-9]{3}:' sample.txt
 
 Znajdź wszystkie liczby trzycyfrowe zaczynające się od 2 przed znakiem : i wyświetl je:
 grep -oE '\b2[0-9]{2}:' sample.txt
+```
+
 
 ## Zadanie 5: Znajdź wszystkie adresy e-mail w tekście.
 
+```sh
 Załóżmy, że masz plik sample.txt z następującą zawartością:
 
 Kontakt: jan.kowalski@example.com
@@ -51,12 +61,14 @@ grep -oE '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}' sample.txt: Flaga -o s
 @: Dosłowny znak @.
 [a-zA-Z0-9.-]+: Część domeny (może zawierać litery, cyfry, kropki i myślniki).
 \.[a-zA-Z]{2,}: Końcówka domeny (kropka i co najmniej dwa znaki).
+```
 
-
-## Średnio zaawansowane wyrażenia regularne
+# Średnio zaawansowane wyrażenia regularne
 
 ## Zadanie 6: Znajdź wszystkie słowa, które zaczynają się na a i kończą się na z.
 
+
+```sh
 grep -oE '\ba\w*z\b' sample.txt
 Wyjaśnienie
 grep -oE '\ba\w*z\b' sample.txt: Flaga -o sprawia, że grep wyświetla tylko dopasowania, a nie całe linie. Flaga -E używa rozszerzonych wyrażeń regularnych.
@@ -65,10 +77,12 @@ a: Litera a (początek słowa).
 \w*: Zero lub więcej znaków alfanumerycznych (dowolna liczba liter lub cyfr pomiędzy a i z).
 z: Litera z (koniec słowa).
 \b: Granica słowa.
-
+```
 
 ## Zadanie 7: Znajdź wszystkie liczby dziesiętne w formacie 123.45.
 
+
+```sh
 Cena produktu wynosi 123.45 PLN.
 Inny produkt kosztuje 67.89 PLN.
 Podatek wynosi 0.99 PLN.
@@ -81,11 +95,11 @@ grep -oE '[0-9]+\.[0-9]{2}' sample.txt: Flaga -o sprawia, że grep wyświetla ty
 [0-9]+: Jedna lub więcej cyfr przed kropką.
 \.: Dosłowna kropka.
 [0-9]{2}: Dokładnie dwie cyfry po kropce.
-
+```
 
 ## Zadanie 8: Znajdź wszystkie numery telefonów w formacie 123-456-7890.
 
-
+```sh
 Skontaktuj się z nami pod numerem 123-456-7890.
 Alternatywny numer to 987-654-3210.
 Niepoprawny format: 1234567890, 123-45-67890, 12-3456-7890.
@@ -101,9 +115,11 @@ grep -oE '[0-9]{3}-[0-9]{3}-[0-9]{4}' sample.txt: Flaga -o sprawia, że grep wy�
 [0-9]{3}: Dokładnie trzy cyfry.
 -: Dosłowny myślnik.
 [0-9]{4}: Dokładnie cztery cyfry.
-
+```
 
 ## Zadanie 9: Znajdź wszystkie słowa, które zawierają co najmniej jedną cyfrę.
+
+```sh
 
 grep -oE '\b\w*[0-9]\w*\b' sample.txt
 
@@ -115,8 +131,11 @@ grep -oE '\b\w*[0-9]\w*\b' sample.txt: Flaga -o sprawia, że grep wyświetla tyl
 \w*: Zero lub więcej znaków alfanumerycznych po cyfrze.
 \b: Granica słowa.
 
+```
+
 ## Zadanie 10: Znajdź wszystkie daty w formacie dd/mm/yyyy.
 
+```sh
 Wydarzenie odbędzie się 01/12/2023.
 Kolejne spotkanie jest zaplanowane na 15/08/2021.
 Niepoprawny format daty: 1/1/2020, 32/13/2020, 12-12-2020.
@@ -141,7 +160,6 @@ Oczywiście! Poniżej znajduje się pełny przykład użycia `grep` z wyrażenie
 
 Załóżmy, że masz plik `sample.txt` z następującą zawartością:
 
-```
 Wydarzenie odbędzie się 01/12/2023.
 Kolejne spotkanie jest zaplanowane na 15/08/2021.
 Niepoprawny format daty: 1/1/2020, 32/13/2020, 12-12-2020.
@@ -212,11 +230,12 @@ Komenda wyświetli wszystkie daty w formacie `dd/mm/yyyy` z pliku `sample.txt`, 
 30/09/1999
 ```
 
+```sh
 Te komendy pozwolą Ci znaleźć i wyświetlić wszystkie daty w formacie `dd/mm/yyyy` w podanym pliku tekstowym, używając `grep` i wyrażeń regularnych.
 ```
 
 
-### Zaawansowane wyrażenia regularne
+# Zaawansowane wyrażenia regularne
 
 ## Zadanie 11: Znajdź wszystkie słowa zaczynające się od wielkiej litery.
 
