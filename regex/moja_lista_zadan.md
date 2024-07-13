@@ -371,7 +371,7 @@ Another valid IP is 10.0.0.1 and also 172.16.254.1.
 EOT
 ```
 
-# Znajdowanie adresów IP w tekście
+### Znajdowanie adresów IP w tekście
 
 Aby znaleźć wszystkie adresy IP w tekście w pliku, użyj poniższego polecenia `grep` wraz z odpowiednim wyrażeniem regularnym:
 
@@ -714,11 +714,24 @@ http://example.com
 https://secure.example.com/login
 https://www.example.org
 http://www.test.com
+
 ```
 
 
 
-Zadanie 22: Znajdź wszystkie akronimy składające się z wielkich liter (np. NASA, FBI).
+
+## Zadanie 22: Znajdź wszystkie akronimy składające się z wielkich liter (np. NASA, FBI).
+
+#### Wyrażenie regularne:
+
+Wyrażenie regularne do znalezienia akronimów składających się z wielkich liter:
+
+```regex
+\b[A-Z]{2,}\b
+
+
+
+
 Zadanie 23: Znajdź wszystkie adresy MAC w tekście.
 Zadanie 24: Znajdź wszystkie liczby w notacji naukowej (np. 1.23e10).
 Zadanie 25: Znajdź wszystkie słowa zaczynające się i kończące się tą samą literą.
