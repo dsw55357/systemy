@@ -369,7 +369,7 @@ Wyrażenie regularne:
 [01]?[0-9][0-9]? - Liczby od 0 do 199.
 (25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?) - Ostatnia grupa liczb od 0 do 255.
 \b - Granica słowa.
-
+```
 
 ## Zadanie 14: Znajdź wszystkie tagi HTML w tekście.
 
