@@ -431,7 +431,7 @@ grep -Eo '[^.!?]*\?' testfile.txt
 ```
 
 
-## Bardziej złożone wyrażenia regularne
+# Bardziej złożone wyrażenia regularne
 
 ## Zadanie 16: Znajdź wszystkie słowa, które mają dokładnie pięć liter.
 
@@ -476,7 +476,7 @@ seven
 
 ## Zadanie 17: Znajdź wszystkie pliki o rozszerzeniu .txt, .jpg lub .png.
 
-# Znajdowanie plików o rozszerzeniu .txt, .jpg lub .png
+### Znajdowanie plików o rozszerzeniu .txt, .jpg lub .png
 
 Aby znaleźć wszystkie pliki o rozszerzeniu `.txt`, `.jpg` lub `.png` w tekście w pliku, użyj poniższego polecenia `grep` wraz z odpowiednim wyrażeniem regularnym:
 
