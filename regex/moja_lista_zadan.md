@@ -350,7 +350,7 @@ Invalid IPs:
 Just some text with no IP addresses.
 Another valid IP is 10.0.0.1 and also 172.16.254.1.
 EOT
-
+```
 
 # Znajdowanie adresów IP w tekście
 
@@ -373,7 +373,6 @@ Wyrażenie regularne:
 
 ## Zadanie 14: Znajdź wszystkie tagi HTML w tekście.
 
-grep -Eo '<[^>]+>' testfile.txt
 grep -E '<([a-zA-Z]|/[a-zA-Z])+>' moja_lista_zadan.md 
 
 Wyjaśnienie polecenia
@@ -654,7 +653,7 @@ Zakładamy, że linki URL zaczynają się od http:// lub https:// i mogą zawier
 
 Wyrażenie regularne do znalezienia linków URL:
 
-https?://[^\s]+
+https?://[a-zA-Z0-9./?=_-]+
 
 Polecenie grep:
 
