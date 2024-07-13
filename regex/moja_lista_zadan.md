@@ -332,19 +332,364 @@ EOT
 
 ## Zadanie 13: Znajdź wszystkie adresy IP w tekście.
 
+### Przygotuj plik `testfile.txt`:
+
+używając poniższego polecenia w terminalu:
+
+```sh
+cat <<EOT > testfile.txt
+Here are some IP addresses:
+192.168.0.1
+255.255.255.255
+8.8.8.8
+10.11.12.14
+127.0.0.1
+Invalid IPs:
+256.256.256.256
+192.168.0.999
+Just some text with no IP addresses.
+Another valid IP is 10.0.0.1 and also 172.16.254.1.
+EOT
+
+
+# Znajdowanie adresów IP w tekście
+
+Aby znaleźć wszystkie adresy IP w tekście w pliku, użyj poniższego polecenia `grep` wraz z odpowiednim wyrażeniem regularnym:
+
+```sh
+grep -Eo '\b((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b' filename.txt
 
 
 
-Zadanie 14: Znajdź wszystkie tagi HTML w tekście.
+Wyrażenie regularne:
+\b - Granica słowa.
+((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3} - Trzy grupy liczb od 0 do 255, każda zakończona kropką.
+25[0-5] - Liczby od 250 do 255.
+2[0-4][0-9] - Liczby od 200 do 249.
+[01]?[0-9][0-9]? - Liczby od 0 do 199.
+(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?) - Ostatnia grupa liczb od 0 do 255.
+\b - Granica słowa.
+
+
+## Zadanie 14: Znajdź wszystkie tagi HTML w tekście.
+
+grep -Eo '<[^>]+>' testfile.txt
+grep -E '<([a-zA-Z]|/[a-zA-Z])+>' moja_lista_zadan.md 
+
+Wyjaśnienie polecenia
+-E: Używa rozszerzonych wyrażeń regularnych (Extended Regular Expressions).
+-o: Wypisuje tylko pasujące fragmenty.
+<: Znak otwarcia tagu.
+[^>]+: Jeden lub więcej znaków, które nie są znakiem >.
+>: Znak zamknięcia tagu.
+filename.txt: Nazwa pliku, w którym szukamy.
+
+cat <<EOT > testfile.txt
+<html>
+  <head>
+    <title>Example Title</title>
+  </head>
+  <body>
+    <h1>This is a heading</h1>
+    <p>This is a paragraph.</p>
+    <a href="http://example.com">This is a link</a>
+    <img src="image.jpg" alt="Example Image">
+  </body>
+</html>
+EOT
+
 Zadanie 15: Znajdź wszystkie zdania kończące się znakiem zapytania ?.
-Bardziej złożone wyrażenia regularne
-Zadanie 16: Znajdź wszystkie słowa, które mają dokładnie pięć liter.
+
+Wyrażenie regularne do znalezienia zdań kończących się znakiem zapytania:
+
+regex
+Skopiuj kod
+[^.!?]*\?
+[^.!?]* - Dowolny ciąg znaków, który nie zawiera kropek, wykrzykników ani znaków zapytania.
+\? - Znak zapytania, który kończy zdanie.
+
+
+### Zapisz zawartość do pliku `testfile.txt`:
+
+Możesz zapisać powyższą zawartość do pliku `testfile.txt` używając poniższego polecenia w terminalu:
+
+```sh
+cat <<EOT > testfile.txt
+Czy wiesz, gdzie jest najbliższa kawiarnia?
+To jest zdanie oznajmujące.
+Może chcesz pójść na spacer?
+To nie jest pytanie!
+Dlaczego jest tak gorąco?
+Znowu jest piękna pogoda.
+Czy mogę zadać pytanie?
+EOT
+
+
+grep -Eo '[^.!?]*\?' testfile.txt
+
+
+
+## Bardziej złożone wyrażenia regularne
+
+## Zadanie 16: Znajdź wszystkie słowa, które mają dokładnie pięć liter.
+
+grep -Eo '\b[a-zA-Z]{5}\b' testfile.txt
+
+Wyjaśnienie polecenia
+-E: Używa rozszerzonych wyrażeń regularnych (Extended Regular Expressions).
+-o: Wypisuje tylko pasujące fragmenty.
+\b: Granica słowa.
+[a-zA-Z]{5}: Dokładnie pięć liter (zarówno małych, jak i wielkich).
+\b: Granica słowa.
+filename.txt: Nazwa pliku, w którym szukamy.
+
+
+Możesz to zrobić używając poniższego polecenia w terminalu:
+
+```sh
+cat <<EOT > testfile.txt
+Hello world! This is a simple test file.
+There are some five-letter words here.
+Which words will match the regex?
+Maybe these: apple, grape, mango, peach.
+But not these: four, sixes, seven, longerword.
+EOT
+
+## Oczekiwany wynik
+
+Hello
+world
+simple
+There
+apple
+grape
+mango
+peach
+sixes
+seven
+
+
+
 Zadanie 17: Znajdź wszystkie pliki o rozszerzeniu .txt, .jpg lub .png.
+
+# Znajdowanie plików o rozszerzeniu .txt, .jpg lub .png
+
+Aby znaleźć wszystkie pliki o rozszerzeniu `.txt`, `.jpg` lub `.png` w tekście w pliku, użyj poniższego polecenia `grep` wraz z odpowiednim wyrażeniem regularnym:
+
+```sh
+grep -Eo '\b\w+\.(txt|jpg|png)\b' filename.txt
+
+
+### Przykład pliku testowego `testfile.txt`:
+
+
+### Zapisz zawartość do pliku `testfile.txt`:
+
+Możesz zapisać powyższą zawartość do pliku `testfile.txt` używając poniższego polecenia w terminalu:
+
+```sh
+cat <<EOT > testfile.txt
+Here are some filenames:
+document.txt
+image.jpg
+picture.png
+archive.zip
+report.doc
+photo.JPG
+notes.Txt
+file.jpeg
+another_image.PNG
+example.txt
+EOT
+
+grep -Eo '\b\w+\.(txt|jpg|png)\b' testfile.txt
+
+Oczekiwany wynik:
+
+document.txt
+image.jpg
+picture.png
+example.txt
+
+Wyjaśnienie polecenia
+-E: Używa rozszerzonych wyrażeń regularnych (Extended Regular Expressions).
+-o: Wypisuje tylko pasujące fragmenty.
+\b: Granica słowa.
+\w+: Dowolna liczba znaków alfanumerycznych i podkreśleń.
+\.: Kropka.
+(txt|jpg|png): Jeden z trzech rozszerzeń: txt, jpg lub png.
+\b: Granica słowa.
+filename.txt: Nazwa pliku, w którym szukamy.
+
+
 Zadanie 18: Znajdź wszystkie linie tekstu, które zaczynają się od cyfry.
+
+
+Polecenie grep:
+
+grep -E '^[0-9]' filename.txt
+
+
+Wyjaśnienie polecenia
+-E: Używa rozszerzonych wyrażeń regularnych (Extended Regular Expressions).
+^: Początek linii.
+[0-9]: Dowolna cyfra.
+filename.txt: Nazwa pliku, w którym szukamy.
+
+
+
+### Zapisz zawartość do pliku `testfile.txt`:
+
+Możesz zapisać powyższą zawartość do pliku `testfile.txt` używając poniższego polecenia w terminalu:
+
+```sh
+cat <<EOT > testfile.txt
+123 Main Street
+This line does not start with a number.
+42 is the answer to everything.
+Another line without a number.
+98 bottles of beer on the wall.
+Just another text line.
+7 days in a week.
+EOT
+
+Oczekiwany wynik:
+css
+Skopiuj kod
+123 Main Street
+42 is the answer to everything.
+98 bottles of beer on the wall.
+7 days in a week.
+
+
 Zadanie 19: Znajdź wszystkie zmienne w kodzie w stylu camelCase.
+
+Zmienne w stylu camelCase zaczynają się małą literą, a kolejne słowa rozpoczynają się wielką literą.
+
+Wyrażenie regularne do znalezienia zmiennych w stylu camelCase:
+
+\b[a-z]+[A-Z][a-zA-Z]*\b
+\b - Granica słowa.
+[a-z]+ - Jedna lub więcej małych liter.
+[A-Z] - Wielka litera.
+[a-zA-Z]* - Zero lub więcej liter (zarówno małych, jak i wielkich).
+\b - Granica słowa.
+
+Polecenie grep:
+
+grep -Eo '\b[a-z]+[A-Z][a-zA-Z]*\b' filename.txt
+
+zawartość pliku testfile.txt:
+
+cat <<EOT > testfile.txt
+int main() {
+    int userAge = 25;
+    float accountBalance = 1024.50;
+    std::string userName = "JohnDoe";
+    bool isLoggedIn = true;
+    double maxSpeed = 150.75;
+    char firstInitial = 'J';
+
+    int notCamelcase = 5;
+    int another_variable = 10;
+    int camelCaseVariable = 15;
+    int anotherCamelCase = 20;
+    return 0;
+}
+EOT
+
+
+
 Zadanie 20: Znajdź wszystkie fragmenty tekstu w cudzysłowach.
-Bardzo zaawansowane wyrażenia regularne
-Zadanie 21: Znajdź wszystkie linki URL w tekście.
+
+Zakładamy, że tekst w cudzysłowach jest otoczony podwójnymi cudzysłowami.
+
+
+Wyrażenie regularne do znalezienia fragmentów tekstu w cudzysłowach:
+
+"[^"]*"
+
+
+Wyjaśnienie polecenia
+-E: Używa rozszerzonych wyrażeń regularnych (Extended Regular Expressions).
+-o: Wypisuje tylko pasujące fragmenty.
+"[^"]*": Dopasowuje tekst otoczony podwójnymi cudzysłowami.
+": Otwierający cudzysłów.
+[^"]*: Dowolna liczba znaków, które nie są cudzysłowami.
+": Zamykający cudzysłów.
+filename.txt: Nazwa pliku, w którym szukamy.
+
+Polecenie grep:
+
+grep -Eo '"[^"]*"' filename.txt
+
+
+
+### Zapisz zawartość do pliku `testfile.txt`:
+
+Możesz zapisać powyższą zawartość do pliku `testfile.txt` używając poniższego polecenia w terminalu:
+
+```sh
+cat <<EOT > testfile.txt
+She said, "Hello, how are you?"
+He replied, "I'm fine, thank you."
+"This is a test file," she noted.
+He added, "Let's see if it works."
+EOT
+
+
+Oczekiwany wynik:
+
+"Hello, how are you?"
+"I'm fine, thank you."
+"This is a test file,"
+"Let's see if it works."
+
+
+## Bardzo zaawansowane wyrażenia regularne
+
+## Zadanie 21: Znajdź wszystkie linki URL w tekście.
+
+Zakładamy, że linki URL zaczynają się od http:// lub https:// i mogą zawierać różne znaki, które są typowe dla adresów URL.
+
+Wyrażenie regularne do znalezienia linków URL:
+
+https?://[^\s]+
+
+Polecenie grep:
+
+grep -Eo 'https?://[a-zA-Z0-9./?=_-]+' filename.txt
+
+Wyjaśnienie polecenia
+
+-E: Używa rozszerzonych wyrażeń regularnych (Extended Regular Expressions).
+-o: Wypisuje tylko pasujące fragmenty.
+https?://: Dopasowuje http:// lub https://.
+[a-zA-Z0-9./?=_-]+ - Jeden lub więcej znaków, które mogą występować w adresie URL (litery, cyfry, kropki, ukośniki, znaki zapytania, znaki równości, podkreślenia, myślniki).
+
+
+### Zapisz zawartość do pliku `testfile.txt`:
+
+Możesz zapisać powyższą zawartość do pliku `testfile.txt` używając poniższego polecenia w terminalu:
+
+```sh
+cat <<EOT > testfile.txt
+Visit our website at http://example.com for more information.
+Secure site: https://secure.example.com/login.
+Find us at https://www.example.org.
+Check out http://www.test.com for more details.
+Some random text without a URL.
+EOT
+
+
+Oczekiwany wynik:
+
+http://example.com
+https://secure.example.com/login
+https://www.example.org
+http://www.test.com
+
+
 Zadanie 22: Znajdź wszystkie akronimy składające się z wielkich liter (np. NASA, FBI).
 Zadanie 23: Znajdź wszystkie adresy MAC w tekście.
 Zadanie 24: Znajdź wszystkie liczby w notacji naukowej (np. 1.23e10).
