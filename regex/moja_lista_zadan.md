@@ -399,7 +399,9 @@ cat <<EOT > testfile.txt
 EOT
 ```
 
-Zadanie 15: Znajdź wszystkie zdania kończące się znakiem zapytania ?.
+### Zadanie 15: Znajdź wszystkie zdania kończące się znakiem zapytania ?.
+
+```sh
 
 Wyrażenie regularne do znalezienia zdań kończących się znakiem zapytania:
 
@@ -414,7 +416,6 @@ Skopiuj kod
 
 Możesz zapisać powyższą zawartość do pliku `testfile.txt` używając poniższego polecenia w terminalu:
 
-```sh
 cat <<EOT > testfile.txt
 Czy wiesz, gdzie jest najbliższa kawiarnia?
 To jest zdanie oznajmujące.
@@ -434,6 +435,8 @@ grep -Eo '[^.!?]*\?' testfile.txt
 
 ## Zadanie 16: Znajdź wszystkie słowa, które mają dokładnie pięć liter.
 
+```sh
+
 grep -Eo '\b[a-zA-Z]{5}\b' testfile.txt
 
 Wyjaśnienie polecenia
@@ -447,7 +450,7 @@ filename.txt: Nazwa pliku, w którym szukamy.
 
 Możesz to zrobić używając poniższego polecenia w terminalu:
 
-```sh
+
 cat <<EOT > testfile.txt
 Hello world! This is a simple test file.
 There are some five-letter words here.
@@ -468,10 +471,10 @@ mango
 peach
 sixes
 seven
+```
 
 
-
-Zadanie 17: Znajdź wszystkie pliki o rozszerzeniu .txt, .jpg lub .png.
+## Zadanie 17: Znajdź wszystkie pliki o rozszerzeniu .txt, .jpg lub .png.
 
 # Znajdowanie plików o rozszerzeniu .txt, .jpg lub .png
 
@@ -521,10 +524,11 @@ Wyjaśnienie polecenia
 (txt|jpg|png): Jeden z trzech rozszerzeń: txt, jpg lub png.
 \b: Granica słowa.
 filename.txt: Nazwa pliku, w którym szukamy.
+```
 
+## Zadanie 18: Znajdź wszystkie linie tekstu, które zaczynają się od cyfry.
 
-Zadanie 18: Znajdź wszystkie linie tekstu, które zaczynają się od cyfry.
-
+```sh
 
 Polecenie grep:
 
@@ -537,13 +541,11 @@ Wyjaśnienie polecenia
 [0-9]: Dowolna cyfra.
 filename.txt: Nazwa pliku, w którym szukamy.
 
-
-
 ### Zapisz zawartość do pliku `testfile.txt`:
 
 Możesz zapisać powyższą zawartość do pliku `testfile.txt` używając poniższego polecenia w terminalu:
 
-```sh
+
 cat <<EOT > testfile.txt
 123 Main Street
 This line does not start with a number.
@@ -561,9 +563,11 @@ Skopiuj kod
 42 is the answer to everything.
 98 bottles of beer on the wall.
 7 days in a week.
+```
 
+## Zadanie 19: Znajdź wszystkie zmienne w kodzie w stylu camelCase.
 
-Zadanie 19: Znajdź wszystkie zmienne w kodzie w stylu camelCase.
+```sh
 
 Zmienne w stylu camelCase zaczynają się małą literą, a kolejne słowa rozpoczynają się wielką literą.
 
@@ -598,7 +602,7 @@ int main() {
     return 0;
 }
 EOT
-
+```
 
 
 Zadanie 20: Znajdź wszystkie fragmenty tekstu w cudzysłowach.
