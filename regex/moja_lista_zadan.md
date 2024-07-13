@@ -427,7 +427,7 @@ EOT
 
 
 grep -Eo '[^.!?]*\?' testfile.txt
-
+```
 
 
 ## Bardziej złożone wyrażenia regularne
