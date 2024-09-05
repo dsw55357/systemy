@@ -162,16 +162,16 @@ Załóżmy, że masz plik `sample.txt` z następującą zawartością:
 
 Wydarzenie odbędzie się 01/12/2023.
 Kolejne spotkanie jest zaplanowane na 15/08/2021.
-Niepoprawny format daty: 1/1/2020, 32/13/2020, 12-12-2020.
+Niepoprawny format daty: 1/1/2020, 32/13/2020, 34/11/2020, 12-12-2020.
 Poprawne daty: 05/11/2020, 30/09/1999.
 ```
 
 ### Komenda w terminalu
 
-1. **Użyj `grep` z wyrażeniem regularnym, aby znaleźć wszystkie daty w formacie `dd/mm/yyyy`**:
+1. **Użyj `grep` z wyrażeniem regularnym, aby znaleźć wszystkie daty w formacie `dd/mm/yyyy` - ulepszona wersja**:
 
 ```sh
-grep -oE '\b[0-3][0-9]/[0-1][0-9]/[0-9]{4}\b' sample.txt
+grep -oE '\b(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/[0-9]{4}\b' sample.txt
 ```
 
 ```markdown
@@ -191,19 +191,26 @@ Poprawne daty: 05/11/2020, 30/09/1999.
 1. **Użyj `grep` z wyrażeniem regularnym, aby znaleźć wszystkie daty w formacie `dd/mm/yyyy`**:
 
 ```sh
-grep -oE '\b[0-3][0-9]/[0-1][0-9]/[0-9]{4}\b' sample.txt
+grep -E '\b(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/[0-9]{4}\b' sample.txt
 ```
 
-## Wyjaśnienie
+### Wyjaśnienie:
 
-- `grep -oE '\b[0-3][0-9]/[0-1][0-9]/[0-9]{4}\b' sample.txt`: Flaga `-o` sprawia, że `grep` wyświetla tylko dopasowania, a nie całe linie. Flaga `-E` używa rozszerzonych wyrażeń regularnych.
-- `\b`: Granica słowa.
-- `[0-3][0-9]`: Dzień (00-39, choć poprawne dni to 01-31).
-- `/`: Dosłowny znak ukośnika.
-- `[0-1][0-9]`: Miesiąc (00-19, choć poprawne miesiące to 01-12).
-- `/`: Dosłowny znak ukośnika.
-- `[0-9]{4}`: Rok składający się z czterech cyfr.
-- `\b`: Granica słowa.
+1. **`(0[1-9]|[12][0-9]|3[01])`**:
+   - `0[1-9]`: Znajduje dni od 01 do 09.
+   - `[12][0-9]`: Znajduje dni od 10 do 29.
+   - `3[01]`: Znajduje dni 30 i 31.
+   To zapewnia, że dzień musi być w zakresie od 01 do 31.
+
+2. **`/(0[1-9]|1[0-2])`**:
+   - `0[1-9]`: Znajduje miesiące od 01 do 09 (styczeń do wrzesień).
+   - `1[0-2]`: Znajduje miesiące 10, 11, 12 (październik, listopad, grudzień).
+   To zapewnia, że miesiąc musi być w zakresie od 01 do 12.
+
+3. **`/[0-9]{4}`**:
+   - Znajduje rok zapisany jako cztery cyfry.
+
+4. **`\b`**: Granica słowa, aby upewnić się, że nie dopasujemy części większego ciągu znaków.
 
 ## Pełny przykład:
 
@@ -216,7 +223,7 @@ echo -e "Wydarzenie odbędzie się 01/12/2023.\nKolejne spotkanie jest zaplanowa
 2. **Znajdź wszystkie daty w formacie `dd/mm/yyyy` i wyświetl je**:
 
 ```sh
-grep -oE '\b[0-3][0-9]/[0-1][0-9]/[0-9]{4}\b' sample.txt
+grep -E '\b(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/[0-9]{4}\b' sample.txt
 ```
 
 ## Wynik
@@ -312,12 +319,6 @@ Barbara
 Cecylia
 Dzieci
 ```
-
-Te komendy pozwolą Ci znaleźć i wyświetlić wszystkie słowa w podanym pliku tekstowym, które zaczynają się od wielkiej litery, używając `grep` i wyrażeń regularnych.
-```
-
-Mam nadzieję, że to pomoże! Jeśli masz więcej pytań lub potrzebujesz dalszej pomocy, daj znać!
-
 
 ## Zadanie 12: Znajdź wszystkie kody pocztowe w formacie XX-XXX.
 
