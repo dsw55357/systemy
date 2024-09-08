@@ -1,0 +1,232 @@
+### Zagadnienie: **"Wygeneruj klucz SSH i dodaj go do zainstalowanej maszyny"**
+
+#### SSH i klucze SSH
+
+SSH (Secure Shell) to protokół sieciowy umożliwiający bezpieczną komunikację między dwoma komputerami w sieci, używany głównie do zdalnego logowania i wykonywania komend na serwerach. Zamiast używać tradycyjnych haseł, można korzystać z **kluczy SSH**, które są bardziej bezpieczne i wygodne.
+
+Klucz SSH składa się z dwóch elementów:
+1. **Klucz publiczny** – klucz, który można bezpiecznie udostępniać, np. na serwerze, do którego chcesz się połączyć.
+2. **Klucz prywatny** – klucz, który powinien być chroniony i nigdy nieudostępniany. Jest on przechowywany na lokalnej maszynie.
+
+#### Kroki, aby wygenerować klucz SSH i dodać go do zainstalowanej maszyny:
+
+### 1. **Wygenerowanie klucza SSH**
+Aby wygenerować parę kluczy SSH (publiczny i prywatny), można skorzystać z narzędzia `ssh-keygen`, które jest dostępne na większości systemów Linux, macOS i Windows (przez WSL lub Git Bash).
+
+#### Krok 1: Uruchomienie polecenia
+Otwórz terminal i wpisz:
+
+```bash
+ssh-keygen -t rsa -b 4096 -C "twoj_email@example.com"
+```
+
+- **`-t rsa`**: Określa typ klucza (w tym przypadku RSA).
+- **`-b 4096`**: Określa długość klucza (zalecane 4096 bitów dla bezpieczeństwa).
+- **`-C`**: Dodaje komentarz (np. adres e-mail), który identyfikuje klucz.
+
+#### Krok 2: Wybór miejsca do zapisania klucza
+Zostaniesz zapytany o miejsce zapisania klucza. Standardowo klucz prywatny jest zapisywany w pliku:
+
+```bash
+~/.ssh/id_rsa
+```
+
+Klucz publiczny zostanie zapisany w pliku:
+
+```bash
+~/.ssh/id_rsa.pub
+```
+
+Jeśli chcesz zapisać klucz w innym miejscu, podaj ścieżkę do nowego pliku.
+
+#### Krok 3: Ustawienie hasła (opcjonalnie)
+Możesz zabezpieczyć klucz hasłem. Jeśli chcesz ustawić hasło, zostaniesz o nie zapytany dwukrotnie. Możesz również pozostawić to pole puste, jeśli nie chcesz dodatkowego zabezpieczenia.
+
+### 2. **Dodanie klucza publicznego na zainstalowaną maszynę (serwer)**
+
+Aby umożliwić logowanie na zdalną maszynę za pomocą klucza SSH, musisz dodać klucz **publiczny** do tej maszyny.
+
+#### Krok 1: Skopiowanie klucza publicznego na serwer
+Najłatwiejszym sposobem jest użycie polecenia `ssh-copy-id`, które automatycznie doda klucz publiczny do serwera.
+
+```bash
+ssh-copy-id user@remote_host
+```
+
+- **`user@remote_host`**: Zastąp `user` nazwą użytkownika, a `remote_host` adresem IP lub domeną serwera, do którego chcesz się połączyć.
+
+To polecenie skopiuje zawartość pliku `~/.ssh/id_rsa.pub` do pliku `~/.ssh/authorized_keys` na serwerze, co umożliwi bezpieczne logowanie bez hasła.
+
+#### Krok 2: Ręczne dodanie klucza (alternatywa)
+Jeśli nie masz dostępu do `ssh-copy-id`, możesz ręcznie skopiować zawartość klucza publicznego.
+
+1. Otwórz plik z kluczem publicznym na swoim komputerze lokalnym:
+
+   ```bash
+   cat ~/.ssh/id_rsa.pub
+   ```
+
+2. Skopiuj wyświetloną zawartość.
+
+3. Zaloguj się na serwer z użyciem hasła:
+
+   ```bash
+   ssh user@remote_host
+   ```
+
+4. Otwórz (lub utwórz) plik `authorized_keys` na serwerze:
+
+   ```bash
+   nano ~/.ssh/authorized_keys
+   ```
+
+5. Wklej skopiowany klucz publiczny do tego pliku.
+
+6. Zapisz i zamknij plik, a następnie upewnij się, że katalog `~/.ssh` oraz plik `authorized_keys` mają odpowiednie uprawnienia:
+
+   ```bash
+   chmod 700 ~/.ssh
+   chmod 600 ~/.ssh/authorized_keys
+   ```
+
+### 3. **Testowanie połączenia**
+Po dodaniu klucza publicznego do serwera, możesz sprawdzić, czy połączenie działa, wykonując:
+
+```bash
+ssh user@remote_host
+```
+
+Jeśli wszystko zostało skonfigurowane poprawnie, nie będziesz musiał podawać hasła, a połączenie zostanie ustanowione za pomocą klucza SSH.
+
+### Podsumowanie
+
+Generowanie kluczy SSH i dodanie ich do zainstalowanej maszyny jest kluczowym krokiem, który znacząco zwiększa bezpieczeństwo połączeń zdalnych. Dzięki temu użytkownik może logować się do serwerów bez użycia haseł, co zmniejsza ryzyko ich przechwycenia przez atakujących.
+
+
+
+
+
+### Aby skonfigurować system tak, aby akceptował tylko połączenia SSH przy wykorzystaniu klucza, należy wprowadzić zmiany w pliku konfiguracyjnym SSH na serwerze, tak aby wyłączyć możliwość logowania się za pomocą hasła. Oto kroki, które należy wykonać:
+
+### Krok 1: Zaloguj się na serwer
+
+Najpierw musisz zalogować się na serwer zdalny (o ile już tego nie zrobiłeś):
+
+```bash
+ssh user@remote_host
+```
+
+### Krok 2: Zmodyfikuj plik konfiguracyjny SSH
+
+Edytuj plik konfiguracyjny SSH, który zazwyczaj znajduje się w katalogu `/etc/ssh/sshd_config`.
+
+Użyj dowolnego edytora tekstu, na przykład `nano`:
+
+```bash
+sudo nano /etc/ssh/sshd_config
+```
+
+### Krok 3: Zmiany w pliku `sshd_config`
+
+Znajdź i zmodyfikuj następujące linie:
+
+1. **Wyłącz logowanie za pomocą hasła**:
+   
+   Aby wyłączyć możliwość logowania się z użyciem haseł, zmień wartość parametru **`PasswordAuthentication`** na **`no`**:
+
+   ```bash
+   PasswordAuthentication no
+   ```
+
+2. **Zezwól tylko na logowanie przy użyciu klucza**:
+   
+   Upewnij się, że **`PubkeyAuthentication`** jest ustawione na **`yes`** (co zazwyczaj jest domyślną wartością):
+
+   ```bash
+   PubkeyAuthentication yes
+   ```
+
+3. **Opcjonalnie: Wyłącz logowanie na podstawie plików z hasłami**:
+
+   Możesz również wyłączyć inne metody uwierzytelniania, takie jak logowanie przy użyciu systemowych plików z hasłami, zmieniając **`ChallengeResponseAuthentication`** na **`no`**:
+
+   ```bash
+   ChallengeResponseAuthentication no
+   ```
+
+### Krok 4: Zrestartuj usługę SSH
+
+Po zapisaniu zmian w pliku konfiguracyjnym, musisz zrestartować usługę SSH, aby nowe ustawienia zaczęły obowiązywać.
+
+Na systemach opartych o `systemd` (np. Ubuntu, Debian):
+
+```bash
+sudo systemctl restart sshd
+```
+
+Na starszych systemach możesz użyć:
+
+```bash
+sudo service ssh restart
+```
+
+### Krok 5: Przetestuj połączenie SSH
+
+Zanim się wylogujesz, upewnij się, że klucze SSH działają poprawnie, otwierając nowe okno terminala i próbując zalogować się na serwer:
+
+```bash
+ssh user@remote_host
+```
+
+Jeśli połączenie się powiedzie bez pytania o hasło, konfiguracja jest poprawna. Możesz się teraz wylogować z serwera.
+
+### Krok 6: Upewnij się, że plik `authorized_keys` zawiera klucz publiczny
+
+Upewnij się, że na serwerze masz poprawnie skonfigurowany plik z kluczem publicznym (`authorized_keys`) dla użytkownika, który będzie się logować.
+
+Plik ten powinien znajdować się w katalogu:
+
+```bash
+~/.ssh/authorized_keys
+```
+
+Klucz publiczny musi być poprawnie dodany, a odpowiednie uprawnienia do katalogu i pliku muszą być ustawione:
+
+```bash
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
+```
+
+### Krok 7: Opcjonalne kroki bezpieczeństwa
+
+1. **Wyłącz logowanie jako root**:
+   
+   W celu zwiększenia bezpieczeństwa warto także wyłączyć możliwość logowania się jako użytkownik root przez SSH. W pliku `/etc/ssh/sshd_config` znajdź i zmodyfikuj linię:
+
+   ```bash
+   PermitRootLogin no
+   ```
+
+2. **Zezwól tylko na określone użytkowniki**:
+
+   Możesz także ograniczyć dostęp SSH tylko do określonych użytkowników. W pliku `/etc/ssh/sshd_config` dodaj linię:
+
+   ```bash
+   AllowUsers user1 user2
+   ```
+
+   Gdzie `user1` i `user2` to użytkownicy, którzy będą mieli dostęp przez SSH.
+
+### Podsumowanie:
+
+1. Edytuj plik `/etc/ssh/sshd_config`, ustawiając:
+   - `PasswordAuthentication no`
+   - `PubkeyAuthentication yes`
+2. Zrestartuj usługę SSH.
+3. Upewnij się, że klucz publiczny jest poprawnie skonfigurowany w pliku `authorized_keys`.
+4. Przetestuj połączenie, upewniając się, że logowanie odbywa się za pomocą klucza SSH, bez użycia hasła.
+
+Od tego momentu serwer będzie akceptować tylko połączenia SSH za pomocą klucza, a logowanie przy użyciu hasła zostanie wyłączone.
+
+
+
